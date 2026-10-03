@@ -29,9 +29,20 @@ public class EmployeeService {
     }
 
     public void deleteEmployeeByID(Long id) {
-        Employee employee=employeeRepository.findById(id)
-                .orElseThrow(()->new EmployeeNotFoundException("Employee not found by id : "+id));
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found by id : " + id));
 
         employeeRepository.delete(employee);
+    }
+
+    public Employee updateEmployeeById(Long id, Employee employee) {
+        Employee existingEmp = employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found by id : " + id));
+        existingEmp.setName(employee.getName());
+        existingEmp.setDepartment(employee.getDepartment());
+        existingEmp.setEmail(employee.getEmail());
+        existingEmp.setSalary(employee.getSalary());
+
+        return employeeRepository.save(existingEmp);
     }
 }
