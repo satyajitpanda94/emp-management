@@ -61,4 +61,13 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> getEmployeeBySalaryGreaterThan(@RequestParam Double salary){
         return ResponseEntity.ok(employeeService.getEmployeeBySalaryGreaterThan(salary));
     }
+
+    @PutMapping("/{id}/salary")
+    public ResponseEntity<String> updateSalary(
+            @PathVariable Long id,
+            @RequestParam Double salary
+    ){
+        employeeService.updateSalary(id,salary);
+        return ResponseEntity.ok("Salary Updated successfully.");
+    }
 }

@@ -2,6 +2,7 @@ package com.satyadev.emp_management.repository;
 
 import com.satyadev.emp_management.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -16,4 +17,14 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
             where e.salary> :salary
             """)
     List<Employee> findEmployeeWithSalaryGreaterThan(@Param("salary") Double salary);
+
+    @Modifying
+    @Query(value="""
+            Update employees e
+            Set e.salary=:salary
+            Where e.id=:id
+            """,
+            nativeQuery = true
+    )
+    int updateSalary(@Param("id") Long id, @Param("salary") Double salary);
 }

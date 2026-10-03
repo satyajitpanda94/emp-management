@@ -3,6 +3,7 @@ package com.satyadev.emp_management.service;
 import com.satyadev.emp_management.entity.Employee;
 import com.satyadev.emp_management.exception.EmployeeNotFoundException;
 import com.satyadev.emp_management.repository.EmployeeRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -52,5 +53,14 @@ public class EmployeeService {
 
     public List<Employee> getEmployeeBySalaryGreaterThan(Double salary) {
         return employeeRepository.findEmployeeWithSalaryGreaterThan(salary);
+    }
+
+    @Transactional
+    public void updateSalary(Long id, Double salary) {
+        int updatedRow=employeeRepository.updateSalary(id,salary);
+
+        if(updatedRow==0){
+            throw new EmployeeNotFoundException("Employee not found with id : "+id);
+        }
     }
 }
