@@ -50,4 +50,9 @@ public class EmployeeController {
         Employee saved=employeeService.updateEmployeeById(id, employee);
         return ResponseEntity.ok(saved);
     }
+
+    @GetMapping("/department/{department}")
+    public ResponseEntity<List<Employee>> getEmployeeByDepartment(@PathVariable String department){
+        return ResponseEntity.ok(employeeService.getEmployeeByDepartment(department));
+    }
 }

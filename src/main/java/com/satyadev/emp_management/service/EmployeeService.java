@@ -45,4 +45,8 @@ public class EmployeeService {
 
         return employeeRepository.save(existingEmp);
     }
+
+    public List<Employee> getEmployeeByDepartment(String department) {
+        return employeeRepository.findByDepartment(department);
+    }
 }
