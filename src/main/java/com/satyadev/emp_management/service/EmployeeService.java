@@ -1,6 +1,7 @@
 package com.satyadev.emp_management.service;
 
 import com.satyadev.emp_management.entity.Employee;
+import com.satyadev.emp_management.exception.EmployeeNotFoundException;
 import com.satyadev.emp_management.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +17,14 @@ public class EmployeeService {
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
+    }
+
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public Employee getEmployee(Long id) {
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee with id : " + id + " not found."));
     }
 }

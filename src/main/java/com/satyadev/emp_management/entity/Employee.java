@@ -8,14 +8,15 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name="employees")
+@Table(name = "employees")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee {
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String email;
     private String department;
