@@ -49,4 +49,8 @@ public class EmployeeService {
     public List<Employee> getEmployeeByDepartment(String department) {
         return employeeRepository.findByDepartment(department);
     }
+
+    public List<Employee> getEmployeeBySalaryGreaterThan(Double salary) {
+        return employeeRepository.findEmployeeWithSalaryGreaterThan(salary);
+    }
 }

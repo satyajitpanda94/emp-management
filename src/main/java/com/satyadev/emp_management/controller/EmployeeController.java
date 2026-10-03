@@ -2,6 +2,7 @@ package com.satyadev.emp_management.controller;
 
 import com.satyadev.emp_management.entity.Employee;
 import com.satyadev.emp_management.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) {
         Employee saved = employeeService.createEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(saved);
@@ -54,5 +55,10 @@ public class EmployeeController {
     @GetMapping("/department/{department}")
     public ResponseEntity<List<Employee>> getEmployeeByDepartment(@PathVariable String department){
         return ResponseEntity.ok(employeeService.getEmployeeByDepartment(department));
+    }
+
+    @GetMapping("/salary")
+    public ResponseEntity<List<Employee>> getEmployeeBySalaryGreaterThan(@RequestParam Double salary){
+        return ResponseEntity.ok(employeeService.getEmployeeBySalaryGreaterThan(salary));
     }
 }
