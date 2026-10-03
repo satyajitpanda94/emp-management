@@ -38,4 +38,11 @@ public class EmployeeController {
                 employeeService.getEmployee(id)
         );
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEmployeeById(@PathVariable Long id) {
+        employeeService.deleteEmployeeByID(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
