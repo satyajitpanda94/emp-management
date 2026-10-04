@@ -78,4 +78,17 @@ public class EmployeeController {
     ) {
         return ResponseEntity.ok(employeeService.findEmpByDepartmentAndSalary(department, salary));
     }
+
+    @GetMapping("/customsearch")
+    public ResponseEntity<List<Employee>> searchEmployees(
+            @RequestParam String department,
+            @RequestParam Double minSalary) {
+
+        return ResponseEntity.ok(
+                employeeService.searchEmployees(
+                        department,
+                        minSalary
+                )
+        );
+    }
 }

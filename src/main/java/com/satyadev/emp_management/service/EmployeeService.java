@@ -67,4 +67,14 @@ public class EmployeeService {
     public List<Employee> findEmpByDepartmentAndSalary(String department, Double salary) {
         return employeeRepository.findEmployeeByDepartmentAndSalary(department,salary);
     }
+
+    public List<Employee> searchEmployees(
+            String department,
+            Double minSalary) {
+
+        return employeeRepository.searchEmployees(
+                department,
+                minSalary
+        );
+    }
 }
