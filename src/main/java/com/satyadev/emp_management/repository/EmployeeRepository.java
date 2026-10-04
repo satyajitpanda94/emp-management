@@ -19,7 +19,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findEmployeeWithSalaryGreaterThan(@Param("salary") Double salary);
 
     @Modifying
-    @Query(value="""
+    @Query(value = """
             Update employees e
             Set e.salary=:salary
             Where e.id=:id
@@ -27,4 +27,17 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
             nativeQuery = true
     )
     int updateSalary(@Param("id") Long id, @Param("salary") Double salary);
+
+    @Query(value = """
+            select *
+            from employees
+            where department=:department
+            and salary>:salary
+            """,
+            nativeQuery = true
+    )
+    List<Employee> findEmployeeByDepartmentAndSalary(
+            @Param("department") String department,
+            @Param("salary") Double salary
+    );
 }

@@ -63,4 +63,8 @@ public class EmployeeService {
             throw new EmployeeNotFoundException("Employee not found with id : "+id);
         }
     }
+
+    public List<Employee> findEmpByDepartmentAndSalary(String department, Double salary) {
+        return employeeRepository.findEmployeeByDepartmentAndSalary(department,salary);
+    }
 }

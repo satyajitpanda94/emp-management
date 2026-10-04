@@ -48,17 +48,17 @@ public class EmployeeController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployeeById(@PathVariable Long id, @RequestBody Employee employee) {
-        Employee saved=employeeService.updateEmployeeById(id, employee);
+        Employee saved = employeeService.updateEmployeeById(id, employee);
         return ResponseEntity.ok(saved);
     }
 
     @GetMapping("/department/{department}")
-    public ResponseEntity<List<Employee>> getEmployeeByDepartment(@PathVariable String department){
+    public ResponseEntity<List<Employee>> getEmployeeByDepartment(@PathVariable String department) {
         return ResponseEntity.ok(employeeService.getEmployeeByDepartment(department));
     }
 
     @GetMapping("/salary")
-    public ResponseEntity<List<Employee>> getEmployeeBySalaryGreaterThan(@RequestParam Double salary){
+    public ResponseEntity<List<Employee>> getEmployeeBySalaryGreaterThan(@RequestParam Double salary) {
         return ResponseEntity.ok(employeeService.getEmployeeBySalaryGreaterThan(salary));
     }
 
@@ -66,8 +66,16 @@ public class EmployeeController {
     public ResponseEntity<String> updateSalary(
             @PathVariable Long id,
             @RequestParam Double salary
-    ){
-        employeeService.updateSalary(id,salary);
+    ) {
+        employeeService.updateSalary(id, salary);
         return ResponseEntity.ok("Salary Updated successfully.");
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Employee>> findEmployeeByDepartmentAndSalary(
+            @RequestParam String department,
+            @RequestParam Double salary
+    ) {
+        return ResponseEntity.ok(employeeService.findEmpByDepartmentAndSalary(department, salary));
     }
 }
