@@ -1,6 +1,6 @@
-package com.satyadev.emp_management.repository;
+package com.satyadev.emp_management.repository.employee;
 
-import com.satyadev.emp_management.entity.Employee;
+import com.satyadev.emp_management.entity.employee.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

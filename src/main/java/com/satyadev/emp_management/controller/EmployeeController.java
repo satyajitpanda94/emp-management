@@ -1,6 +1,6 @@
 package com.satyadev.emp_management.controller;
 
-import com.satyadev.emp_management.entity.Employee;
+import com.satyadev.emp_management.entity.employee.Employee;
 import com.satyadev.emp_management.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

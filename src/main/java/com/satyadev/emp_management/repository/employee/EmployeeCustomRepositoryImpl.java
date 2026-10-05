@@ -1,6 +1,6 @@
-package com.satyadev.emp_management.repository;
+package com.satyadev.emp_management.repository.employee;
 
-import com.satyadev.emp_management.entity.Employee;
+import com.satyadev.emp_management.entity.employee.Employee;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;

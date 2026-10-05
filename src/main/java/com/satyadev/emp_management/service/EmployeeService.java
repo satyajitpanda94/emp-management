@@ -1,8 +1,10 @@
 package com.satyadev.emp_management.service;
 
-import com.satyadev.emp_management.entity.Employee;
+import com.satyadev.emp_management.entity.audit.AuditLog;
+import com.satyadev.emp_management.entity.employee.Employee;
 import com.satyadev.emp_management.exception.EmployeeNotFoundException;
-import com.satyadev.emp_management.repository.EmployeeRepository;
+import com.satyadev.emp_management.repository.audit.AuditRepository;
+import com.satyadev.emp_management.repository.employee.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,14 @@ import java.util.*;
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final AuditRepository auditRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
+    public EmployeeService(
+            EmployeeRepository employeeRepository,
+            AuditRepository auditRepository
+    ) {
         this.employeeRepository = employeeRepository;
+        this.auditRepository=auditRepository;
     }
 
     public List<Employee> getAllEmployees() {
@@ -21,7 +28,18 @@ public class EmployeeService {
     }
 
     public Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+        Employee createdEmp= employeeRepository.save(employee);
+        AuditLog auditLog = new AuditLog();
+
+        auditLog.setEmployeeId(createdEmp.getId());
+        auditLog.setAction("CREATE");
+        auditLog.setDescription(
+                "Employee created: " + createdEmp.getName()
+        );
+
+        auditRepository.save(auditLog);
+
+        return createdEmp;
     }
 
     public Employee getEmployee(Long id) {

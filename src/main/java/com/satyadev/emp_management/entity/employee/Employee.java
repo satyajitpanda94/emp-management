@@ -1,4 +1,4 @@
-package com.satyadev.emp_management.entity;
+package com.satyadev.emp_management.entity.employee;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
